@@ -1,0 +1,58 @@
+<div class="dialog-header">
+  <div class="header-icon">
+    <mat-icon>auto_stories</mat-icon>
+  </div>
+  <div class="header-text">
+    <h2 class="header-title">Inaugurar uma Nova Saga</h2>
+    <p class="header-subtitle">Grave as primeiras palavras no registro eterno.</p>
+  </div>
+</div>
+
+<div class="dialog-body">
+  <div class="field-group">
+    <label class="field-label">TÍTULO DA SAGA</label>
+    <input
+      type="text"
+      class="field-input"
+      placeholder="ex: Os Sussurros das Criptas de Vor-Gal"
+      [(ngModel)]="sagaTitle"
+    />
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">SISTEMA DE RPG</label>
+    <div class="select-wrapper">
+      <select class="field-select" [(ngModel)]="rpgSystem">
+        <option value="" disabled>Selecione um sistema</option>
+        @for (system of systems; track system) {
+          <option [value]="system">{{ system }}</option>
+        }
+      </select>
+      <mat-icon class="select-arrow">expand_more</mat-icon>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">ESTÉTICA DA AVENTURA</label>
+    <div class="aesthetics-grid">
+      @for (aes of aesthetics; track aes.id) {
+        <div
+          class="aesthetic-card"
+          [class.selected]="selectedAesthetic === aes.id"
+          (click)="selectedAesthetic = aes.id"
+        >
+          <img [src]="aes.image" [alt]="aes.label" class="aesthetic-image"/>
+          <div class="aesthetic-overlay">
+            <mat-icon>{{ aes.icon }}</mat-icon>
+            <span>{{ aes.label }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="dialog-footer">
+  <button class="cancel-btn" (click)="cancel()">CANCELAR</button>
+  <button class="create-btn" (click)="create()" [disabled]="!sagaTitle.trim()">CRIAR SAGA</button>
+</div>

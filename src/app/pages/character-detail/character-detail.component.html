@@ -1,0 +1,151 @@
+<div class="character-layout">
+  <!-- ═══ Left Column: Portrait & Stats ═══ -->
+  <div class="left-column">
+    <div class="portrait-card">
+      <div class="portrait-image" [style.background-color]="character.avatarColor">
+        <mat-icon class="portrait-icon">{{ character.avatarIcon }}</mat-icon>
+      </div>
+      <div class="portrait-overlay">
+        <h1 class="char-name">{{ character.characterName }}</h1>
+        <span class="char-subtitle">{{ character.race | uppercase }} {{ character.class | uppercase }} &bull; NVL {{ character.level }}</span>
+      </div>
+    </div>
+
+    <div class="abilities-grid">
+      @for (ability of character.abilities; track ability.name) {
+        <div class="ability-box" [class.primary]="ability.isPrimary">
+          <span class="ability-name">{{ ability.name | uppercase }}</span>
+          <span class="ability-value">{{ ability.value }}</span>
+          <span class="ability-mod" [class.primary]="ability.isPrimary">{{ getModifierStr(ability.modifier) }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="vitals-section">
+      <div class="hp-display">
+        <span class="vital-label">PONTOS DE VIDA</span>
+        <span class="hp-numbers" [style.color]="getHpColor()">{{ character.hp }} / {{ character.maxHp }}</span>
+      </div>
+      <div class="hp-bar">
+        <div class="hp-bar-fill" [style.width.%]="getHpPercent()" [style.background-color]="getHpColor()"></div>
+      </div>
+
+      <div class="vitals-row">
+        <div class="vital-box">
+          <span class="vital-label">CLASSE DE ARMADURA</span>
+          <span class="vital-value">{{ character.ac }}</span>
+        </div>
+        <div class="vital-box">
+          <span class="vital-label">INICIATIVA</span>
+          <span class="vital-value">{{ getModifierStr(character.initiative) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Middle Column: Combat / Inventory ═══ -->
+  <div class="middle-column">
+    <div class="tab-switcher">
+      <button class="tab-btn" [class.active]="activeTab === 'combat'" (click)="activeTab = 'combat'">Combate</button>
+      <button class="tab-btn" [class.active]="activeTab === 'inventory'" (click)="activeTab = 'inventory'">Inventário</button>
+    </div>
+
+    @if (activeTab === 'combat') {
+      <div class="attacks-section">
+        <div class="section-header">
+          <h2 class="section-title">Invocações e Ataques</h2>
+          <div class="spell-slots" *ngIf="character.spellSlots !== '—'">
+            <span class="slot-count">{{ character.spellSlots }}</span>
+            <span class="slot-level">({{ character.spellSlotLevel }})</span>
+          </div>
+        </div>
+
+        @for (attack of character.attacks; track attack.name) {
+          <div class="attack-card">
+            <div class="attack-icon-box">
+              <mat-icon>{{ attack.icon }}</mat-icon>
+            </div>
+            <div class="attack-info">
+              <span class="attack-name">{{ attack.name }}</span>
+              <span class="attack-details">{{ attack.details }}</span>
+            </div>
+            <div class="attack-stats">
+              <span class="hit-label">ACERTO/CD</span>
+              <span class="hit-value">{{ attack.hitDc }}</span>
+            </div>
+            @if (attack.damageDice) {
+              <div class="damage-badge">
+                {{ attack.damageDice }}
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="skills-section">
+        <h2 class="section-title">Perícias Principais</h2>
+        <div class="skills-grid">
+          @for (skill of character.skills; track skill.name) {
+            <div class="skill-tag" [class.proficient]="skill.proficient">
+              @if (skill.proficient) {
+                <mat-icon class="skill-star">star</mat-icon>
+              }
+              <span>{{ skill.name }}</span>
+              <span class="skill-bonus">{{ getModifierStr(skill.bonus) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (activeTab === 'inventory') {
+      <div class="inventory-placeholder">
+        <mat-icon>inventory_2</mat-icon>
+        <p>O inventário será implementado em breve.</p>
+      </div>
+    }
+  </div>
+
+  <!-- ═══ Right Column: Chronicle ═══ -->
+  <div class="right-column">
+    <div class="chronicle-card">
+      <div class="chronicle-header">
+        <mat-icon>menu_book</mat-icon>
+        <span>CRÔNICA</span>
+      </div>
+
+      <div class="lore-block patron-block">
+        <h3 class="lore-label">{{ character.patron | uppercase }}</h3>
+        <p class="lore-text">{{ character.patronDescription }}</p>
+      </div>
+
+      <div class="lore-block">
+        <h3 class="lore-label">ANTECEDENTE: {{ character.background | uppercase }}</h3>
+        <p class="lore-text">{{ character.backgroundDescription }}</p>
+      </div>
+
+      <div class="lore-block">
+        <h3 class="lore-label">OBJETIVOS PESSOAIS</h3>
+        <ul class="goals-list">
+          @for (goal of character.personalGoals; track goal) {
+            <li>{{ goal }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="scribe-card">
+      <div class="scribe-header">
+        <span>NOTAS DO ESCRIBA</span>
+        <button mat-icon-button class="scribe-action">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <textarea
+        class="scribe-textarea"
+        [(ngModel)]="scribeNotes"
+        placeholder="Sussurros do vazio..."
+      ></textarea>
+    </div>
+  </div>
+</div>

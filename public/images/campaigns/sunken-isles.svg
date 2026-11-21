@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="ocean-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="50%" stop-color="#1a2a4a"/>
+      <stop offset="100%" stop-color="#2a1a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#ocean-sky)"/>
+  <!-- Stars -->
+  <circle cx="100" cy="50" r="1.5" fill="#fff" opacity="0.4"/>
+  <circle cx="250" cy="30" r="1" fill="#fff" opacity="0.3"/>
+  <circle cx="500" cy="60" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="700" cy="40" r="1" fill="#fff" opacity="0.3"/>
+  <circle cx="350" cy="80" r="1" fill="#fff" opacity="0.2"/>
+  <!-- Sun/moon low on horizon -->
+  <circle cx="400" cy="200" r="40" fill="#c4a35a" opacity="0.15"/>
+  <circle cx="400" cy="200" r="25" fill="#c4a35a" opacity="0.1"/>
+  <!-- Distant island silhouettes -->
+  <ellipse cx="150" cy="250" rx="80" ry="30" fill="#0a1020"/>
+  <polygon points="120,250 150,210 180,250" fill="#0a1020"/>
+  <ellipse cx="650" cy="260" rx="100" ry="25" fill="#0a1020"/>
+  <polygon points="620,260 660,215 700,260" fill="#0a1020"/>
+  <!-- Water -->
+  <rect x="0" y="270" width="800" height="130" fill="#0a1020" opacity="0.8"/>
+  <!-- Water reflections -->
+  <rect x="370" y="280" width="60" height="2" fill="#c4a35a" opacity="0.08" rx="1"/>
+  <rect x="380" y="300" width="40" height="1.5" fill="#c4a35a" opacity="0.06" rx="1"/>
+  <rect x="385" y="320" width="30" height="1" fill="#c4a35a" opacity="0.04" rx="1"/>
+  <!-- Ship silhouette -->
+  <polygon points="300,265 340,265 350,275 290,275" fill="#060e1a"/>
+  <line x1="320" y1="265" x2="320" y2="235" stroke="#060e1a" stroke-width="2"/>
+  <polygon points="320,238 345,258 320,258" fill="#060e1a" opacity="0.8"/>
+  <!-- Foreground rocks -->
+  <polygon points="0,350 30,310 60,330 90,300 120,340 150,400 0,400" fill="#060e18"/>
+  <polygon points="720,360 750,320 780,340 800,330 800,400 700,400" fill="#060e18"/>
+</svg>

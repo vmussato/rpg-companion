@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="60%" stop-color="#1a1a3e"/>
+      <stop offset="100%" stop-color="#2a1a3e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#sky)"/>
+  <!-- Moon -->
+  <circle cx="650" cy="80" r="35" fill="#c4a35a" opacity="0.3"/>
+  <circle cx="660" cy="75" r="30" fill="#0a0a1a"/>
+  <!-- Distant mountains -->
+  <polygon points="0,320 100,220 200,280 350,180 500,260 600,200 700,240 800,190 800,400 0,400" fill="#0f0f2a" opacity="0.6"/>
+  <!-- Castle silhouette -->
+  <rect x="280" y="200" width="30" height="120" fill="#0a0a1a"/>
+  <rect x="270" y="190" width="50" height="15" fill="#0a0a1a"/>
+  <polygon points="275,190 295,160 315,190" fill="#0a0a1a"/>
+  <rect x="340" y="230" width="80" height="90" fill="#0a0a1a"/>
+  <rect x="330" y="220" width="100" height="15" fill="#0a0a1a"/>
+  <rect x="360" y="280" width="20" height="40" fill="#1a1a3e"/>
+  <rect x="440" y="180" width="25" height="140" fill="#0a0a1a"/>
+  <rect x="432" y="170" width="41" height="15" fill="#0a0a1a"/>
+  <polygon points="437,170 452,140 468,170" fill="#0a0a1a"/>
+  <!-- Window lights -->
+  <rect x="350" y="245" width="8" height="10" fill="#c4a35a" opacity="0.4"/>
+  <rect x="400" y="245" width="8" height="10" fill="#c4a35a" opacity="0.3"/>
+  <rect x="350" y="265" width="8" height="10" fill="#c4a35a" opacity="0.2"/>
+  <!-- Foreground hills -->
+  <polygon points="0,350 150,300 300,330 500,310 650,340 800,320 800,400 0,400" fill="#080816"/>
+  <!-- Trees silhouette -->
+  <polygon points="50,350 60,300 70,350" fill="#060612"/>
+  <polygon points="80,350 93,290 106,350" fill="#060612"/>
+  <polygon points="700,340 715,280 730,340" fill="#060612"/>
+  <polygon points="735,340 748,295 761,340" fill="#060612"/>
+  <polygon points="760,340 770,310 780,340" fill="#060612"/>
+</svg>

@@ -1,0 +1,68 @@
+<div class="page-header">
+  <div class="header-text">
+    <h1 class="page-title">Campanhas Ativas</h1>
+    <p class="page-subtitle">Gerencie suas sagas em andamento, acompanhe a progressão dos jogadores e prepare-se para o próximo encontro decisivo.</p>
+  </div>
+  <button class="sort-btn">
+    <mat-icon>filter_list</mat-icon>
+    ORDENAR: RECENTES
+  </button>
+</div>
+
+<div class="campaigns-grid">
+  <!-- New Campaign Card -->
+  <div class="campaign-card new-campaign-card" (click)="openNewCampaign()">
+    <img src="images/campaigns/new-saga.svg" alt="Nova saga" class="new-campaign-bg"/>
+    <div class="new-campaign-content">
+      <div class="new-campaign-icon">
+        <mat-icon>add</mat-icon>
+      </div>
+      <h2 class="new-campaign-title">Iniciar uma Nova Saga</h2>
+      <p class="new-campaign-text">Crie uma nova campanha e<br>reúna seus bravos aventureiros.</p>
+    </div>
+  </div>
+
+  @for (campaign of campaigns; track campaign.id) {
+    <div class="campaign-card">
+      <div class="card-banner">
+        <img [src]="campaign.bannerImage" [alt]="campaign.name" class="banner-image"/>
+        <div class="banner-overlay"></div>
+        <span class="tier-badge">NÍVEL {{ campaign.tierLevel }} &bull; {{ campaign.tier }}</span>
+      </div>
+
+      <div class="card-body">
+        <div class="card-title-row">
+          <h2 class="card-title">{{ campaign.name }}</h2>
+          <div class="next-session">
+            <span class="next-session-label">PRÓXIMA SESSÃO</span>
+            <span class="next-session-date">{{ campaign.nextSession }} &bull;</span>
+            <span class="next-session-time">{{ campaign.nextSessionTime }}</span>
+          </div>
+        </div>
+
+        <div class="card-progress-row">
+          <span class="chapter-name">{{ campaign.chapter }}</span>
+          <span class="progress-text">{{ campaign.progress }}% Completo</span>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="campaign.progress" class="campaign-progress"></mat-progress-bar>
+
+        <div class="card-footer">
+          <div class="player-avatars">
+            @for (player of campaign.players; track player.initials) {
+              <div class="player-avatar" [style.background-color]="player.color">
+                {{ player.initials }}
+              </div>
+            }
+            @if (campaign.extraPlayers > 0) {
+              <div class="player-extra">+{{ campaign.extraPlayers }}</div>
+            }
+          </div>
+          <button class="enter-table-btn" (click)="enterCampaign(campaign.id)">
+            ENTRAR NA MESA
+            <mat-icon>login</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

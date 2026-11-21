@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140">
+  <rect width="200" height="140" fill="#0a0808"/>
+  <circle cx="100" cy="50" r="40" fill="#1a0a0a" opacity="0.5"/>
+  <circle cx="85" cy="45" r="6" fill="#2a0a0a"/>
+  <circle cx="85" cy="45" r="3" fill="#8b2020" opacity="0.6"/>
+  <circle cx="115" cy="45" r="6" fill="#2a0a0a"/>
+  <circle cx="115" cy="45" r="3" fill="#8b2020" opacity="0.6"/>
+  <polygon points="0,110 30,95 60,105 90,90 120,100 150,92 180,105 200,95 200,140 0,140" fill="#0a0505"/>
+  <line x1="40" y1="110" x2="35" y2="80" stroke="#1a0a0a" stroke-width="3"/>
+  <line x1="35" y1="85" x2="25" y2="75" stroke="#1a0a0a" stroke-width="2"/>
+  <line x1="35" y1="90" x2="45" y2="78" stroke="#1a0a0a" stroke-width="2"/>
+  <line x1="160" y1="105" x2="165" y2="75" stroke="#1a0a0a" stroke-width="3"/>
+  <line x1="165" y1="80" x2="175" y2="70" stroke="#1a0a0a" stroke-width="2"/>
+  <line x1="165" y1="85" x2="155" y2="73" stroke="#1a0a0a" stroke-width="2"/>
+  <circle cx="100" cy="25" r="15" fill="#1a0a0a" opacity="0.3"/>
+</svg>

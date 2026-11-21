@@ -1,0 +1,73 @@
+@if (insideCampaign) {
+  <nav class="top-navbar">
+    <div class="navbar-left">
+      <a routerLink="/" class="app-title">O ARQUIVO ELDRITCH</a>
+      <div class="nav-tabs">
+        <a routerLink="/" class="nav-tab">Central</a>
+        <span class="nav-tab tab-active">{{ activeCampaignName || 'Campanha' }}</span>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <button mat-icon-button>
+        <mat-icon matBadge="3" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>settings</mat-icon>
+      </button>
+      <div class="avatar-circle">
+        <mat-icon>person</mat-icon>
+      </div>
+    </div>
+  </nav>
+}
+
+<div class="app-body">
+  @if (insideCampaign) {
+    <aside class="sidebar">
+      <div class="sidebar-campaign-info">
+        <div class="campaign-icon">
+          <mat-icon>shield</mat-icon>
+        </div>
+        <div class="campaign-text">
+          <span class="campaign-name-label">MESTRE DA MESA</span>
+          <span class="campaign-session">CAMPANHA ATIVA</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a [routerLink]="['/campanha', activeCampaignId]" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }" class="sidebar-link">
+          <mat-icon>menu_book</mat-icon>
+          <span>CRÔNICAS</span>
+        </a>
+        <a [routerLink]="['/campanha', activeCampaignId, 'jogadores']" routerLinkActive="nav-active" class="sidebar-link">
+          <mat-icon>group</mat-icon>
+          <span>JOGADORES</span>
+        </a>
+        <a class="sidebar-link">
+          <mat-icon>swords</mat-icon>
+          <span>ENCONTROS</span>
+        </a>
+        <a class="sidebar-link">
+          <mat-icon>map</mat-icon>
+          <span>MAPAS</span>
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="new-chapter-btn roll-btn">
+          ROLAR INICIATIVA
+        </button>
+        <a class="sidebar-link sidebar-link-sm">
+          <mat-icon>auto_stories</mat-icon>
+          <span>Compêndio</span>
+        </a>
+        <a class="sidebar-link sidebar-link-sm">
+          <mat-icon>casino</mat-icon>
+          <span>Bandeja de Dados</span>
+        </a>
+      </div>
+    </aside>
+  }
+
+  <main class="main-content">
+    <router-outlet />
+  </main>
+</div>

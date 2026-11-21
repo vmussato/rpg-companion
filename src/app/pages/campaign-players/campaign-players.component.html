@@ -1,0 +1,94 @@
+<div class="players-header">
+  <div class="header-text">
+    <h1 class="page-title">Grupo Ativo</h1>
+    <p class="page-subtitle">Gerenciando {{ players.length }} aventureiros na campanha <em>{{ campaignName }}</em>.</p>
+  </div>
+  <div class="header-controls">
+    <div class="search-box">
+      <mat-icon>search</mat-icon>
+      <input
+        type="text"
+        placeholder="Buscar personagens..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearchChange()"
+      />
+    </div>
+    <div class="filter-toggle">
+      <button
+        class="toggle-btn"
+        [class.active]="filterMode === 'all'"
+        (click)="setFilterMode('all')"
+      >Todos</button>
+      <button
+        class="toggle-btn"
+        [class.active]="filterMode === 'online'"
+        (click)="setFilterMode('online')"
+      >Online</button>
+    </div>
+  </div>
+</div>
+
+<div class="filters-row">
+  <button class="class-filter-btn" (click)="classFilter = ''; onClassFilterChange()">
+    <mat-icon>filter_list</mat-icon>
+    Classe
+  </button>
+  @for (cls of availableClasses; track cls) {
+    <button
+      class="class-chip"
+      [class.active]="classFilter === cls"
+      (click)="classFilter = classFilter === cls ? '' : cls; onClassFilterChange()"
+    >{{ cls }}</button>
+  }
+</div>
+
+<div class="players-grid">
+  <!-- New Character Card -->
+  <div class="player-card new-character-card">
+    <div class="new-character-content">
+      <div class="new-character-icon">
+        <mat-icon>person_add</mat-icon>
+      </div>
+      <h2 class="new-character-title">Criar Personagem</h2>
+      <p class="new-character-text">Adicione um novo aventureiro<br>ao seu grupo.</p>
+    </div>
+  </div>
+
+  @for (player of filteredPlayers; track player.characterName) {
+    <div class="player-card" (click)="openCharacter(player)">
+      <div class="card-top">
+        <div class="portrait" [style.background-color]="player.avatarColor">
+          <mat-icon class="portrait-icon">{{ player.avatarIcon }}</mat-icon>
+          <span class="online-dot" [class.online]="player.online"></span>
+        </div>
+        <div class="card-info">
+          <h2 class="character-name">{{ player.characterName }}</h2>
+          <p class="played-by">Jogado por: <span>{{ player.playerName }}</span></p>
+          <div class="badges">
+            <span class="badge level-badge">NÍVEL {{ player.level }}</span>
+            <span class="badge class-badge">{{ player.class | uppercase }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-bottom">
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">HP</span>
+            <span class="stat-value" [style.color]="getHpColor(player)">{{ player.hp }}/{{ player.maxHp }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">CA</span>
+            <span class="stat-value">{{ player.ac }}</span>
+          </div>
+        </div>
+        <div class="hp-bar">
+          <div class="hp-bar-fill" [style.width.%]="getHpPercent(player)" [style.background-color]="getHpColor(player)"></div>
+        </div>
+        <button class="detail-arrow">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,153 @@
+<div class="campaign-detail-layout">
+  <!-- Main Column -->
+  <div class="main-column">
+    @if (viewingChronicle) {
+      <!-- Viewing Past Chronicle -->
+      <div class="session-card viewing-past">
+        <div class="session-header">
+          <div>
+            <button class="back-btn" (click)="backToCurrentSession()">
+              <mat-icon>arrow_back</mat-icon>
+              <span>Voltar à Sessão Atual</span>
+            </button>
+            <div class="chronicle-view-date">
+              <span class="chronicle-view-day">{{ viewingChronicle.day }}</span>
+              <span class="chronicle-view-month">{{ viewingChronicle.month }}</span>
+            </div>
+            <h1 class="session-title">{{ viewingChronicle.title }}</h1>
+          </div>
+          <div class="session-actions">
+            <button mat-icon-button class="action-btn">
+              <mat-icon>share</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="chronicle-full-content">
+          @for (paragraph of viewingChronicle.fullContent.split('\n\n'); track $index) {
+            <p>{{ paragraph }}</p>
+          }
+        </div>
+
+        <div class="editor-footer">
+          <span>CRÔNICA ARQUIVADA</span>
+        </div>
+      </div>
+    } @else {
+      <!-- Session Editor Card -->
+      <div class="session-card">
+        <div class="session-header">
+          <div>
+            <span class="session-label">Sessão Atual</span>
+            <h1 class="session-title">{{ campaign.currentSessionTitle }}</h1>
+          </div>
+          <div class="session-actions">
+            <button mat-icon-button class="action-btn">
+              <mat-icon>save</mat-icon>
+            </button>
+            <button mat-icon-button class="action-btn">
+              <mat-icon>share</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="editor-area">
+          <div class="editor-toolbar">
+            <button class="toolbar-btn"><strong>B</strong></button>
+            <button class="toolbar-btn"><em>I</em></button>
+            <button class="toolbar-btn"><mat-icon>format_list_bulleted</mat-icon></button>
+            <button class="toolbar-btn"><mat-icon>image</mat-icon></button>
+          </div>
+          <textarea
+            class="editor-content"
+            [(ngModel)]="sessionContent"
+            placeholder="Comece a registrar os feitos lendários..."
+          ></textarea>
+        </div>
+
+        <div class="editor-footer">
+          <span>ELDRITCH FORGE ENGINE V2.4</span>
+        </div>
+      </div>
+    }
+
+    <!-- Past Chronicles -->
+    <div class="past-chronicles">
+      <h2 class="chronicles-title">
+        <mat-icon>history</mat-icon>
+        Crônicas Passadas
+      </h2>
+
+      @for (chronicle of campaign.pastChronicles; track chronicle.title; let i = $index) {
+        <div class="chronicle-item" (click)="openChronicle(chronicle)">
+          <div class="chronicle-date">
+            <span class="chronicle-day">{{ chronicle.day }}</span>
+            <span class="chronicle-month">{{ chronicle.month }}</span>
+          </div>
+          <div class="chronicle-info">
+            <h3 class="chronicle-title">{{ chronicle.title }}</h3>
+            <p class="chronicle-summary">{{ chronicle.summary }}</p>
+          </div>
+          <mat-icon class="chronicle-chevron" [class.expanded]="expandedChronicle === i">chevron_right</mat-icon>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Right Sidebar -->
+  <div class="right-column">
+    <!-- Active Party Card -->
+    <div class="party-card">
+      <div class="party-header">
+        <span class="party-title">Grupo Ativo</span>
+        <span class="party-count">{{ campaign.party.length }} MEMBROS</span>
+      </div>
+
+      @for (member of campaign.party; track member.characterName) {
+        <div class="party-member">
+          <div class="member-avatar" [style.background-color]="member.avatarColor">
+            <span class="avatar-initials">{{ member.initials }}</span>
+            <span class="member-level">{{ member.level }}</span>
+          </div>
+          <div class="member-info">
+            <span class="member-character">{{ member.characterName }}</span>
+            <div class="member-meta">
+              <span class="member-player">{{ member.playerName }}</span>
+              <span class="member-class">{{ member.class }}</span>
+            </div>
+          </div>
+        </div>
+      }
+
+      <button class="invite-btn">
+        <mat-icon>person_add</mat-icon>
+        CONVIDAR JOGADOR
+      </button>
+    </div>
+
+    <!-- Campaign Pulse Card -->
+    <div class="pulse-card">
+      <h3 class="pulse-title">PULSO DA CAMPANHA</h3>
+
+      <div class="pulse-stat">
+        <div class="pulse-stat-header">
+          <span class="pulse-stat-label">MORAL DO GRUPO</span>
+          <span class="pulse-stat-value" [style.color]="getMoraleColor()">{{ campaign.partyMorale }}</span>
+        </div>
+        <div class="pulse-bar">
+          <div class="pulse-bar-fill" [style.width.%]="campaign.moralePercent" [style.background-color]="getMoraleColor()"></div>
+        </div>
+      </div>
+
+      <div class="pulse-stat">
+        <div class="pulse-stat-header">
+          <span class="pulse-stat-label">AMEAÇA IMINENTE</span>
+          <span class="pulse-stat-value" [style.color]="getThreatColor()">{{ campaign.loomingThreat }}</span>
+        </div>
+        <div class="pulse-bar">
+          <div class="pulse-bar-fill" [style.width.%]="campaign.threatPercent" [style.background-color]="getThreatColor()"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
